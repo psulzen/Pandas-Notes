@@ -1,0 +1,18 @@
+### import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import sqlite3
+conn = sqlite3.connect('database.sqlite')
+c = conn.cursor()
+# Country Data COUNTRY table
+COUNTRY_df = pd.read_sql_query("select * from COUNTRY;", conn)
+# League data from LEAGUE
+LEAGUE_df = pd.read_sql_query("select * from LEAGUE;", conn)
+#
+Team_df = pd.read_sql_query("select * from TEAM;", conn)
+# Match data from Matches - just pulling 1 year for now -2015/2016 might be latest year
+# You can remove restriction if you want
+#MATCH_df = pd.read_sql_query("select * from MATCH where SEASON = '2015/2016';", conn)
+# Match data from Matches - just pulling 1 and relevant data for now - we can remove restriction later if we want
+MATCH_df = pd.read_sql_query("SELECT DATE, LEAGUE_ID, HOME_TEAM_API_ID, AWAY_TEAM_API_ID, HOME_TEAM_GOAL, AWAY_TEAM_GOAL FROM MATCH WHERE SEASON = '2015/2016' ;",
+conn)
